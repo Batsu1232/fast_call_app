@@ -1,8 +1,6 @@
 import 'package:fast_call_app/models/call_list.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 
 class HomeUI extends StatefulWidget {
   const HomeUI({Key? key}) : super(key: key);
@@ -153,175 +151,173 @@ class _HomeUIState extends State<HomeUI> {
         ),
         centerTitle: true,
       ),
-      body: Center(
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
           children: [
-            Text(
-              'เหตุฉุกเฉิน',
-              style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
+            ExpansionTile(
+              title: Text(
+                'เหตุฉุกเฉิน',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            Expanded(
-              child: ListView.separated(
-                separatorBuilder: (context, index) {
-                  return Divider();
-                },
-                itemCount: callListP.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    onTap: () {
-                      _makePhoneCall(
+              children: [
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: callListP.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      onTap: () {
+                        _makePhoneCall(
+                          callListP[index].number!,
+                        );
+                      },
+                      title: Text(
+                        callListP[index].name!,
+                      ),
+                      subtitle: Text(
                         callListP[index].number!,
-                      );
-                    },
-                    title: Text(
-                      callListP[index].name!,
-                    ),
-                    subtitle: Text(
-                      callListP[index].number!,
-                    ),
-                    trailing: Icon(
-                      Icons.arrow_forward_ios,
-                    ),
-                  );
-                },
-              ),
+                      ),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios,
+                      ),
+                    );
+                  },
+                ),
+              ],
             ),
-            Text(
-              'แจ้งไฟดับ น้ำไม่ไหล',
-              style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
+            ExpansionTile(
+              title: Text(
+                'แจ้งไฟดับ น้ำไม่ไหล',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            Expanded(
-              child: ListView.separated(
-                separatorBuilder: (context, index) {
-                  return Divider();
-                },
-                itemCount: callListE.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    onTap: () {
-                      _makePhoneCall(
+              children: [
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: callListE.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      onTap: () {
+                        _makePhoneCall(
+                          callListE[index].number!,
+                        );
+                      },
+                      title: Text(
+                        callListE[index].name!,
+                      ),
+                      subtitle: Text(
                         callListE[index].number!,
+                      ),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios,
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+            ExpansionTile(
+                title: Text(
+                  'หน่วยงานต่างๆ',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                children: [
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: callListM.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        onTap: () {
+                          _makePhoneCall(
+                            callListM[index].number!,
+                          );
+                        },
+                        title: Text(
+                          callListM[index].name!,
+                        ),
+                        subtitle: Text(
+                          callListM[index].number!,
+                        ),
+                        trailing: Icon(
+                          Icons.arrow_forward_ios,
+                        ),
                       );
                     },
-                    title: Text(
-                      callListE[index].name!,
-                    ),
-                    subtitle: Text(
-                      callListE[index].number!,
-                    ),
-                    trailing: Icon(
-                      Icons.arrow_forward_ios,
-                    ),
-                  );
-                },
+                  ),
+                ]),
+            ExpansionTile(
+              title: Text(
+                'สายด่วนธนาคาร',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            Text(
-              'หน่วยงานต่างๆ',
-              style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Expanded(
-              child: ListView.separated(
-                separatorBuilder: (context, index) {
-                  return Divider();
-                },
-                itemCount: callListM.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    onTap: () {
-                      _makePhoneCall(
-                        callListM[index].number!,
-                      );
-                    },
-                    title: Text(
-                      callListM[index].name!,
-                    ),
-                    subtitle: Text(
-                      callListM[index].number!,
-                    ),
-                    trailing: Icon(
-                      Icons.arrow_forward_ios,
-                    ),
-                  );
-                },
-              ),
-            ),
-            Text(
-              'สายด่วนธนาคาร',
-              style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Expanded(
-              child: ListView.separated(
-                separatorBuilder: (context, index) {
-                  return Divider();
-                },
-                itemCount: callListB.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    onTap: () {
-                      _makePhoneCall(
+              children: [
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: callListB.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      onTap: () {
+                        _makePhoneCall(
+                          callListB[index].number!,
+                        );
+                      },
+                      title: Text(
+                        callListB[index].name!,
+                      ),
+                      subtitle: Text(
                         callListB[index].number!,
-                      );
-                    },
-                    title: Text(
-                      callListB[index].name!,
-                    ),
-                    subtitle: Text(
-                      callListB[index].number!,
-                    ),
-                    trailing: Icon(
-                      Icons.arrow_forward_ios,
-                    ),
-                  );
-                },
-              ),
+                      ),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios,
+                      ),
+                    );
+                  },
+                ),
+              ],
             ),
-            Text(
-              'ผู้ให้บริการโทรศัพท์และอินเตอร์เน็ต',
-              style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
+            ExpansionTile(
+              title: Text(
+                'ผู้ให้บริการโทรศัพท์และอินเตอร์เน็ต',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            Expanded(
-              child: ListView.separated(
-                separatorBuilder: (context, index) {
-                  return Divider();
-                },
-                itemCount: callListI.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    onTap: () {
-                      _makePhoneCall(
+              children: [
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: callListI.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      onTap: () {
+                        _makePhoneCall(
+                          callListI[index].number!,
+                        );
+                      },
+                      title: Text(
+                        callListI[index].name!,
+                      ),
+                      subtitle: Text(
                         callListI[index].number!,
-                      );
-                    },
-                    title: Text(
-                      callListI[index].name!,
-                    ),
-                    subtitle: Text(
-                      callListI[index].number!,
-                    ),
-                    trailing: Icon(
-                      Icons.arrow_forward_ios,
-                    ),
-                  );
-                },
-              ),
+                      ),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios,
+                      ),
+                    );
+                  },
+                ),
+              ],
             ),
           ],
         ),

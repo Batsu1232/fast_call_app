@@ -1,8 +1,11 @@
 # fast_call_app
+<<<<<<< HEAD
 ### แอปพลิเคชั่นสายด่วน
 ###### พัฒนาโดย 6319c10002 นายคุณากร สมศรีอักษรแสง
 
 <img src="https://i.ibb.co/y8BQBrj/fastapp.png" width="250">
+=======
+>>>>>>> 10889ab (V2 change epanded to ExpansionTile)
 
 A new Flutter project.
 
